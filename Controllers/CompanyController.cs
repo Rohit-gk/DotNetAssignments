@@ -34,7 +34,7 @@ namespace CompanyCrudApi.Controllers
 
         [HttpGet]
         [Route("getCompany")]
-        public async Task<ActionResult<Company>> GetCompany()
+        public ActionResult<Company> GetCompany()
         {
             return Ok(company);
         }
@@ -43,7 +43,7 @@ namespace CompanyCrudApi.Controllers
 
         [HttpGet]
         [Route("getCompanyById")]
-        public async Task<ActionResult<Company>> GetCompanyById(int id)
+        public ActionResult<Company> GetCompanyById(int id)
         {
             var companys = company.Find(x => x.Id == id);
             if (companys == null)
@@ -55,7 +55,7 @@ namespace CompanyCrudApi.Controllers
 
         [HttpPost]
         [Route("addCompany")]
-        public async Task<ActionResult<Company>> AddCompany(Company request)
+        public ActionResult<Company> AddCompany(Company request)
         {
             company.Add(request);
             return Ok(company);
@@ -64,7 +64,7 @@ namespace CompanyCrudApi.Controllers
 
         [HttpPut]
         [Route("updateCompany")]
-        public async Task<ActionResult<Company>> UpdateCompany(Company request)
+        public ActionResult<Company> UpdateCompany(Company request)
         {
             var companys = company.Find(x => x.Id == request.Id);
             if (companys == null)
@@ -78,7 +78,7 @@ namespace CompanyCrudApi.Controllers
 
         [HttpDelete]
         [Route("deleteCompany")]
-        public async Task<ActionResult<Company>> DeleteCompany(int id)
+        public ActionResult<Company> DeleteCompany(int id)
         {
             var companys = company.Find(x => x.Id == id);
             if (companys == null)
