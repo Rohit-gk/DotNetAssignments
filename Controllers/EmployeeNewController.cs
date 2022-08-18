@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepoPatternProject.Models;
+using RepoPatternProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +14,20 @@ namespace RepoPatternProject.Controllers
     public class EmployeeNewController : ControllerBase
     {
         private readonly EmployeeContext _employeeContext;
+        private readonly EmployeeService _employeeServiceObj;
 
         public EmployeeNewController(EmployeeContext EmployeeContext)
         {
             _employeeContext = EmployeeContext;
+            _employeeServiceObj = new EmployeeService();
         }
 
 
         [HttpGet]
-        public IEnumerable<Employee> GetEmployees()
+        public async Task<ActionResult> GetEmployees()
         {
-            return _employeeContext.Employee;
+            //return _employeeContext.Employee;
+            return Ok(await _employeeServiceObj.GetEmployees());
         }
 
         [HttpPost]

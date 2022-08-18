@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RepoPatternProject.Repositories;
+using RepoPatternProject.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +30,9 @@ namespace RepoPatternProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
-
+            
             services.AddControllers();
+            services.AddScoped<IEmployeeRepo, EmployeeService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RepoPatternProject", Version = "v1" });
